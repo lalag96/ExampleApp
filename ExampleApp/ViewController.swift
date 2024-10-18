@@ -41,7 +41,6 @@ class ViewController: UIViewController {
 	
 	private func setupImageView() {
 			// Настройка контейнера для изображения
-		imageContainerView.frame = CGRect(x: 100, y: 310, width: 200, height: 180)
 		imageContainerView.layer.cornerRadius = 20
 		imageContainerView.layer.shadowColor = UIColor.black.cgColor
 		imageContainerView.layer.shadowOpacity = 0.7
@@ -52,7 +51,7 @@ class ViewController: UIViewController {
 	private func setupImage() {
 			// Добавление изображения в контейнер
 		imageView.image = UIImage(named: "raccoon")
-		imageView.frame = imageContainerView.bounds
+        imageView.contentMode = .scaleAspectFill
 		imageView.layer.cornerRadius = 20
 		imageView.clipsToBounds = true
 		
@@ -73,11 +72,28 @@ class ViewController: UIViewController {
 	
 	private func setupLayout() {
 		textLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageContainerView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
 		
 		NSLayoutConstraint.activate([
 			textLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
 			textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 		])
+        
+        NSLayoutConstraint.activate([
+            imageContainerView.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 150),
+            imageContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageContainerView.heightAnchor.constraint(equalToConstant: 200),
+            imageContainerView.widthAnchor.constraint(equalToConstant: 200)
+            ])
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: imageContainerView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor)
+        ])
+            
 	}
 }
 
